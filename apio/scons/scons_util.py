@@ -643,7 +643,7 @@ def make_iverilog_action(
 
     # -- Construct the action string.
     action = (
-        "iverilog {0} {1} -o $TARGET {2} {3} {4} {5} {6} $SOURCES"
+        "iverilog -g2012 {0} {1} -o $TARGET {2} {3} {4} {5} {6} $SOURCES"
     ).format(
         ivl_path_param,
         "-v" if verbose else "",
