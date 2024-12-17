@@ -379,7 +379,9 @@ def make_verilog_src_scanner(env: SConsEnvironment) -> Scanner.Base:
         # Sanity check. Should be called only to scan verilog files.
         assert file_node.name.lower().endswith(
             ".v"
-        ), f"Not a .v file: {file_node.name}"
+        ) or file_node.name.lower().endswith(
+            ".sv"
+        ) , f"Not a .v of .sv file: {file_node.name}"
         includes_set = set()
         # If the file doesn't exist, this returns an empty string.
         file_text = file_node.get_text_contents()
@@ -493,7 +495,7 @@ def get_source_files(env: SConsEnvironment) -> Tuple[List[str], List[str]]:
     otherwise as a synthesis file.
     """
     # -- Get a list of all *.v files in the project dir.
-    files: List[File] = env.Glob("*.v")
+    files: List[File] = env.Glob("*.v") + env.Glob("*.sv")
 
     # Split file names to synth files and testbench file lists
     synth_srcs = []
